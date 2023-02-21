@@ -17,6 +17,7 @@ public class PostController {
     public String indPosts() {
         return "view an individual post";
     }
+//    Note: (@PathVariable Long id)
 
     @GetMapping("/posts/create")
     @ResponseBody
@@ -29,5 +30,7 @@ public class PostController {
     public String createPosts() {
         return "create a new post";
     }
+
+//    Note: @PostMapping
 
 }
