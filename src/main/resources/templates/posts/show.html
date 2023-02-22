@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Show One Post</title>
-</head>
+<head th:replace="partials :: head('View a Post')"></head>
+
 <body class="main-bg main-container">
-<!--<nav th:replace="partials :: navbar"></nav>-->
+<nav th:replace="partials :: navbar"></nav>
 <main class="container">
-  <h1 th:text="${post.title}"></h1>
-  <p th:text="${post.body}"></p>
+    <h1 th:text="${post.title}"></h1>
+    <p th:text="${post.body}"></p>
 </main>
-<!--<footer th:replace="partials :: footer"></footer>-->
-<!--<div th:replace="partials :: boot-scripts"></div>-->
+<footer th:replace="partials :: footer"></footer>
+<div th:replace="partials :: boot-scripts"></div>
 </body>
 </html>

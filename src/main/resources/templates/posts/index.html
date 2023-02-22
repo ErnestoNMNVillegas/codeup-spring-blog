@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Show All Posts</title>
-</head>
+<head th:replace="partials :: head('All Posts')"></head>
+
 <body class="main-bg main-container">
-<!--<nav th:replace="partials :: navbar"></nav>-->
+<nav th:replace="partials :: navbar"></nav>
 <main class="container">
-<!--  <h1 th:text="${posts.title}"></h1>-->
-<!--  <p th:text="${posts.body}"></p>-->
 
     <div th:each="post : ${posts}">
         <p th:text="${post.id}" />
@@ -17,7 +13,7 @@
     </div>
 
 </main>
-<!--<footer th:replace="partials :: footer"></footer>-->
-<!--<div th:replace="partials :: boot-scripts"></div>-->
+<footer th:replace="partials :: footer"></footer>
+<div th:replace="partials :: boot-scripts"></div>
 </body>
 </html>
