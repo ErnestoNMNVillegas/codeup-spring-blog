@@ -1,4 +1,4 @@
-package com.codeup.codeupspringblog;
+package com.codeup.codeupspringblog.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +14,6 @@ public class RollDice {
     public String rollDice() {
         return "rolldice";
     }
-
-
-//    @PostMapping("/roll-dice")
-//    public String rollGuess(@RequestParam(name = "button") String guess) {
-//        return "rolldice";
-//    }
 
     @GetMapping("/roll-dice/1")
     @ResponseBody
