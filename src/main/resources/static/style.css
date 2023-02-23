@@ -1,0 +1,25 @@
+html * {
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.main-bg {
+    background: #F7F3E3;
+    color: #2B2118
+}
+
+.main-container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.footer-bg {
+    background: #212121;
+    color: #F7F3E3;
+}
+
+.navbar {
+    background: #FD9268;
+}
