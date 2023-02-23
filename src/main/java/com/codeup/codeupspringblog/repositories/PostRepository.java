@@ -16,6 +16,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> searchByTitleLike(@Param("term") String term);
 
 
-    @Override
-    <S extends Post> S save(S entity);
+//    @Override
+//    <S extends Post> S save(S entity);
 }
