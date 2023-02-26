@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="partials :: head('Dice Roll Result')"></head>
+
+<!--Note:  show html created after walk-thru. Initially done with response body.-->
+<body class="main-bg main-container">
+<nav th:replace="partials :: navbar"></nav>
+<h1>Results below:</h1>
+<br>
+<h3>User guessed: <span th:text="${number}"></span>. The die laned on <span th:text="${randomInt}"></span>.</h3>
+<h4 th:if="${number != randomInt}">You lost. Try again</h4>
+<h4 th:if="${number == randomInt}">Winner winner!</h4>
+
+<footer th:replace="partials :: footer"></footer>
+<div th:replace="partials :: boot-scripts"></div>
+</body>
+</html>

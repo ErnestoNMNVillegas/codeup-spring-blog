@@ -46,6 +46,7 @@ public class PostController {
         model.addAttribute("post", new Post());
         return "posts/create";
     }
+    //How will constructor know which field in html goes to which object property?  There is no req parem to specify
 
 
     @PostMapping("/posts/create")
