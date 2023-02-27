@@ -1,21 +1,24 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
+import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
+import com.codeup.codeupspringblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 
 @Controller
 public class PostController {
 
     private final PostRepository postDao;
+    private final UserRepository userDao;
 
-    public PostController(PostRepository postDao) {
+    public PostController(PostRepository postDao, UserRepository userDao) {
         this.postDao = postDao;
+        this.userDao = userDao;
     }
+
 
     @GetMapping("/posts")
     public String posts(Model model) {
@@ -42,19 +45,19 @@ public class PostController {
 
 
     @GetMapping("/posts/create")
-    public String viewCreatePostForm(Model model) {
-        model.addAttribute("post", new Post());
+    public String viewCreatePostForm() {
+//        model.addAttribute("post", new Post());
         return "posts/create";
     }
     //How will constructor know which field in html goes to which object property?  There is no req parem to specify
 
 
     @PostMapping("/posts/create")
-    public String createPosts(Post post) {
-//    (@RequestParam(name = "title") String title, @RequestParam(name = "body") String body)
-//        Post post = new Post(
-//                title,
-//                body);
+    public String createPosts(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
+        User user = userDao.findUserById(1);
+        Post post = new Post(
+                title,
+                body, user);
         postDao.save(post);
         return "redirect:/posts";
     }
