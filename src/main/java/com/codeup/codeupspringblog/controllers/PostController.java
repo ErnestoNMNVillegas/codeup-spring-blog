@@ -4,6 +4,7 @@ import com.codeup.codeupspringblog.models.Post;
 import com.codeup.codeupspringblog.models.User;
 import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
+import com.codeup.codeupspringblog.services.EmailService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,13 @@ public class PostController {
     private final PostRepository postDao;
     private final UserRepository userDao;
 
-    public PostController(PostRepository postDao, UserRepository userDao) {
+    private final EmailService emailService;
+
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService) {
         this.postDao = postDao;
         this.userDao = userDao;
+        this.emailService = emailService;
     }
-
 
     @GetMapping("/posts")
     public String posts(Model model) {
@@ -38,29 +41,35 @@ public class PostController {
     public String indPosts(@PathVariable long id, Model model) {
 //        Post post = new Post(id, "Test Post", "Really cool post!");
 //        model.addAttribute("post", post);
-        model.addAttribute("post", postDao.findAdById(id));
+        model.addAttribute("post", postDao.findPostById(id));
         return "posts/show";
     }
 
 
 
     @GetMapping("/posts/create")
-    public String viewCreatePostForm() {
-//        model.addAttribute("post", new Post());
+    public String viewCreatePostForm(Model model) {
+        model.addAttribute("post", new Post());
         return "posts/create";
     }
-    //How will constructor know which field in html goes to which object property?  There is no req parem to specify
 
 
     @PostMapping("/posts/create")
-    public String createPosts(@RequestParam(name = "title") String title, @RequestParam(name = "body") String body) {
-        User user = userDao.findUserById(1);
-        Post post = new Post(
-                title,
-                body, user);
+    public String createPosts(@ModelAttribute Post post) {
+        User user = userDao.findUserById(2);
+        post.setUser(user);
+        System.out.println("user = " + post.getUser().getId());
         postDao.save(post);
+        emailService.prepareAndSend(post);
         return "redirect:/posts";
     }
+
+    @GetMapping("/posts/{id}/edit")
+    public String editPostForm(@PathVariable long id, Model model){
+        model.addAttribute("post", postDao.findPostById(id));
+        return "posts/create";
+    }
+
 
 
 }

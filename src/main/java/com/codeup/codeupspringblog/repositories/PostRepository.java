@@ -10,10 +10,12 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
-    Post findAdByTitle(String title);
-    Post findAdById(long id);
+//    Post findAdByTitle(String title);
+//    Post findAdById(long id);
     @Query("from Post p where p.title like %:term%")
     List<Post> searchByTitleLike(@Param("term") String term);
+
+    Post findPostById(long id);
 
 
 //    @Override
