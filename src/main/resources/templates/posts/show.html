@@ -10,7 +10,8 @@
     <p th:text="${post.user.email}"></p>
 
     <div th:if="${#authentication.principal.id == post.user.id}">
-        <button th:action="@{/posts/${post.id}/edit}" th:method="post">Edit</button>
+<!--        <button th:action="@{/posts/${post.id}/edit}" th:method="post">Edit</button>-->
+        <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="text-links">Edit</a>
     </div>
 
 
