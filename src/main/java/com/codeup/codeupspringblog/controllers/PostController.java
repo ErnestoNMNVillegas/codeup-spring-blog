@@ -89,6 +89,19 @@ public class PostController {
         }
     }
 
+//    @GetMapping("/posts/{id}/delete")
+//    public String deleteLink(@PathVariable long id, Model model){
+//        Post post = postDao.findPostById(id);
+//        model.addAttribute("post", post);
+//        return "/posts/{id}/delete";
+//    }
+//
+//    @PostMapping("/posts/{id}/delete")
+//    public String deletePost(Post post){
+//        postDao.deletePostById(post.getId());
+//        return "redirect:/posts";
+//    }
+
 
 
 }
