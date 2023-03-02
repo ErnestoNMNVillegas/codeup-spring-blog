@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials :: head('View a Post')"></head>
 
 <body class="main-bg main-container">
@@ -8,6 +8,11 @@
     <h1 th:text="${post.title}"></h1>
     <p th:text="${post.body}"></p>
     <p th:text="${post.user.email}"></p>
+
+    <div th:if="${#authentication.principal.id == post.user.id}">
+        <button th:action="@{/posts/${post.id}/edit}" th:method="post">Edit</button>
+    </div>
+
 
 </main>
 <footer th:replace="partials :: footer"></footer>

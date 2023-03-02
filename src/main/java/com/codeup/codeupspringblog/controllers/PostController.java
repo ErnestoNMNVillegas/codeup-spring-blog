@@ -63,12 +63,30 @@ public class PostController {
         postDao.save(post);
         emailService.prepareAndSend(post);
         return "redirect:/posts";
+
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        Post origPost = postDao.findPostById(post.getId());
+//        if(user.getId() == origPost.getUser().getId()) {
+//            post.setUser(user);
+//            postDao.save(post);
+//            emailService.prepareAndSend(post);
+//        }
+//        return "redirect:/posts";
     }
 
     @GetMapping("/posts/{id}/edit")
     public String editPostForm(@PathVariable long id, Model model){
-        model.addAttribute("post", postDao.findPostById(id));
-        return "posts/create";
+//        model.addAttribute("post", postDao.findPostById(id));
+//        return "posts/create";
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Post post = postDao.findPostById(id);
+        if (user.getId() == post.getUser().getId()) {
+            model.addAttribute("post", post);
+            return "posts/create";
+        } else {
+            return "redirect:/posts";
+        }
     }
 
 
